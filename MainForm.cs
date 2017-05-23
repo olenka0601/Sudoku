@@ -7,10 +7,10 @@ using System.IO;
 
 namespace sudoku
 {
-	/// <summary>
-	/// Description of MainForm.
-	/// </summary>
-	public partial class MainForm : Form
+    /// <summary>
+    /// Description of MainForm.
+    /// <summary>
+    public partial class MainForm : Form
 	{	
      	private  int a = 0;
      	private  int b = 0;
@@ -51,14 +51,14 @@ namespace sudoku
 		void PRVL()
 		{
 	 			
-			if(ryven=="Легкий")
+			if(ryven=="Easy")
 			{
 				 file.GoToLevel("light.tt");
 				 label89.Text=file.Str;
 				 
 				 label86.Text="0";
 				
-			}else if(ryven=="Середній")
+			}else if(ryven=="Normal")
 			{
 				 file.GoToLevel("average.tt");
 			 label89.Text=file.Str;
@@ -66,7 +66,7 @@ namespace sudoku
 				 label86.Text=error.ToString();
 				 fullTime=6;
 				
-			}else if(ryven=="Тяжкий")
+			}else if(ryven=="Complicated")
 			{
 				 file.GoToLevel("hard.tt");
 			label89.Text=file.Str;
@@ -172,9 +172,9 @@ namespace sudoku
         {
 		 	for(int i=0,y=0;i<9;i++)
             	{
-        		for(int o=0;o<9;o++,y++)
-        		{
-        		if(st[y]!='*')
+                for (int o = 0; o < 9; o++, y++)
+                {
+                    if (st[y] != '*' )  
         		{
         			lib[i,o].Text=st[y].ToString();
         			lib[i,o].Enabled=false;
@@ -252,7 +252,7 @@ namespace sudoku
 			  else
 			  {
 			  
-			  	MessageBox.Show("Така цифра вже існує");
+			  	MessageBox.Show("This number has already existed");
 			  	if(flag_x_y==false)
 			  	{
 			  		label85.Text=CountOfError.ToString();
@@ -261,7 +261,7 @@ namespace sudoku
 			  	}  
 			  		if (error ==CountOfError)
 			  	{
-			  		DialogResult dr=MessageBox.Show("Ви зробили забагато помилок","Почати заново?",MessageBoxButtons.YesNo);
+			  		DialogResult dr=MessageBox.Show("A lot of mistakes!","Would you try again?",MessageBoxButtons.YesNo);
 			  		if(dr== DialogResult.Yes)
 			  		{
 			  			restart();
@@ -409,7 +409,7 @@ namespace sudoku
 			timer();
 //			
 			}else {
-				MessageBox.Show("Ви пройшли рівень");
+				MessageBox.Show("Level was successfully completed!");
 				the_transition_to_a_new_level  lev=new the_transition_to_a_new_level(specznak,ryven);
 				lev.save();
 				ur++;
@@ -418,7 +418,7 @@ namespace sudoku
 		}
 		void Button1Click(object sender, EventArgs e)
 		{
-			DialogResult dr=MessageBox.Show("Завершити партію?","Вийти",MessageBoxButtons.YesNo);
+			DialogResult dr=MessageBox.Show("Do you want to finish?","Exit",MessageBoxButtons.YesNo);
 			
 			if(dr==DialogResult.Yes){
 				close=true;
@@ -446,7 +446,7 @@ namespace sudoku
 		}
 		void Timer2Tick(object sender, EventArgs e)
 		{
-			if(ryven=="Тяжкий"||ryven=="Середній")
+			if(ryven=="Complicated"||ryven=="Normal")
 			{
 			timer2.Interval = 1000;
             timer2.Enabled = true;
@@ -454,7 +454,7 @@ namespace sudoku
 			  	{
 			  			timer2.Stop();
 			  			timer1.Stop();
-			  		DialogResult dr=MessageBox.Show("Пройти заново?","Ви програли",MessageBoxButtons.YesNo);
+			  		DialogResult dr=MessageBox.Show("Try again?","You lose",MessageBoxButtons.YesNo);
 			  		if(dr== DialogResult.Yes)
 			  		{
 			  			restart();
